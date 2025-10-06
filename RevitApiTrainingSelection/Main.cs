@@ -112,8 +112,23 @@ namespace RevitApiTrainingSelection
 
             //TaskDialog.Show("Количество типов дверей:", familySymbols.Count.ToString());
 
-            var ducts = new FilteredElementCollector(document).OfClass(typeof(Duct)).Cast<Duct>().ToList();
-            TaskDialog.Show("Количество воздуховодов:", ducts.Count.ToString());
+            int info = 0;
+            FilteredElementCollector collector = new FilteredElementCollector(document);
+            List<FamilyInstance> familyInstances_1 = collector
+                .OfCategory(BuiltInCategory.OST_Columns)
+                .WhereElementIsNotElementType()
+                .Cast<FamilyInstance>()
+                .ToList();
+            info += familyInstances_1.Count;
+            FilteredElementCollector collector_2 = new FilteredElementCollector(document);
+            List<FamilyInstance> familyInstances_2 = collector_2
+                .OfCategory(BuiltInCategory.OST_StructuralColumns)
+                .WhereElementIsNotElementType()
+                .Cast<FamilyInstance>()
+                .ToList();
+            info += familyInstances_2.Count;
+            
+            TaskDialog.Show("Количество колонн:", info.ToString());
 
             return Result.Succeeded;
         }
