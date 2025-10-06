@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Mechanical;
+using Autodesk.Revit.DB.Plumbing;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
 using System;
@@ -111,24 +112,10 @@ namespace RevitApiTrainingSelection
             //    .ToList();
 
             //TaskDialog.Show("Количество типов дверей:", familySymbols.Count.ToString());
-
-            int info = 0;
-            FilteredElementCollector collector = new FilteredElementCollector(document);
-            List<FamilyInstance> familyInstances_1 = collector
-                .OfCategory(BuiltInCategory.OST_Columns)
-                .WhereElementIsNotElementType()
-                .Cast<FamilyInstance>()
-                .ToList();
-            info += familyInstances_1.Count;
-            FilteredElementCollector collector_2 = new FilteredElementCollector(document);
-            List<FamilyInstance> familyInstances_2 = collector_2
-                .OfCategory(BuiltInCategory.OST_StructuralColumns)
-                .WhereElementIsNotElementType()
-                .Cast<FamilyInstance>()
-                .ToList();
-            info += familyInstances_2.Count;
-            
-            TaskDialog.Show("Количество колонн:", info.ToString());
+           
+            FilteredElementCollector collector = new FilteredElementCollector(document, document.ActiveView.Id);
+            var pipes = collector.OfClass(typeof(Pipe)).Cast<Pipe>().ToList();
+            TaskDialog.Show("Количество труб:", pipes.Count.ToString());
 
             return Result.Succeeded;
         }
