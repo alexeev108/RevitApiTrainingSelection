@@ -1,5 +1,6 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
+using Autodesk.Revit.DB.Mechanical;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
 using System;
@@ -89,7 +90,7 @@ namespace RevitApiTrainingSelection
 
             //Поиск элементов по классу
             //var walls = new FilteredElementCollector(document).OfClass(typeof(Wall)).Cast<Wall>().ToList();
-            //TaskDialog.Show("Количество стен:", walls.Count.ToString());
+            //TaskDialog.Show("Количество воздуховодов:", walls.Count.ToString());
 
             //Поиск элементов по нескольким условиям
             //ElementCategoryFilter elementCategoryFilter = new ElementCategoryFilter(BuiltInCategory.OST_Windows);
@@ -102,14 +103,17 @@ namespace RevitApiTrainingSelection
             //TaskDialog.Show("Количество окон:", windows.Count.ToString());
 
             //Поиск типов элементов
-            FilteredElementCollector collector = new FilteredElementCollector(document);
-            List<FamilySymbol> familySymbols = collector
-                .OfCategory(BuiltInCategory.OST_Doors)
-                .WhereElementIsElementType()
-                .Cast<FamilySymbol>()
-                .ToList();
+            //FilteredElementCollector collector = new FilteredElementCollector(document);
+            //List<FamilySymbol> familySymbols = collector
+            //    .OfCategory(BuiltInCategory.OST_Doors)
+            //    .WhereElementIsElementType()
+            //    .Cast<FamilySymbol>()
+            //    .ToList();
 
-            TaskDialog.Show("Количество типов дверей:", familySymbols.Count.ToString());
+            //TaskDialog.Show("Количество типов дверей:", familySymbols.Count.ToString());
+
+            var ducts = new FilteredElementCollector(document).OfClass(typeof(Duct)).Cast<Duct>().ToList();
+            TaskDialog.Show("Количество воздуховодов:", ducts.Count.ToString());
 
             return Result.Succeeded;
         }
