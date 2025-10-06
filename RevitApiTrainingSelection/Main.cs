@@ -101,15 +101,45 @@ namespace RevitApiTrainingSelection
 
             //TaskDialog.Show("Количество окон:", windows.Count.ToString());
 
-            //Поиск типов элементов
             FilteredElementCollector collector = new FilteredElementCollector(document);
-            List<FamilySymbol> familySymbols = collector
-                .OfCategory(BuiltInCategory.OST_Doors)
-                .WhereElementIsElementType()
-                .Cast<FamilySymbol>()
+            List<Element> levels = collector
+                .OfClass(typeof(Level))
+                .Cast<Element>()
                 .ToList();
 
-            TaskDialog.Show("Количество типов дверей:", familySymbols.Count.ToString());
+            var elementList = new List<Element>();
+            foreach (Element el in collector)
+            {
+                if (el.Name == "Level 1")
+                {
+                    elementList.Add(el);
+                }
+                if (el.Name == "Level 2")
+                {
+                    elementList.Add(el);
+                }
+            }
+
+            ElementId levelId_1 = elementList[0].Id;
+            ElementId levelId_2 = elementList[1].Id;
+
+            ElementLevelFilter level1Filter = new ElementLevelFilter(levelId_1);
+            FilteredElementCollector collector_2 = new FilteredElementCollector(document);
+            List<Element> allWallsOnLevel1 = collector_2
+                .OfCategory(BuiltInCategory.OST_Walls)
+                .WherePasses(level1Filter)
+                .Cast<Element>()
+                .ToList();
+            ElementLevelFilter level2Filter = new ElementLevelFilter(levelId_2);
+            FilteredElementCollector collector_3 = new FilteredElementCollector(document);
+            List<Element> allWallsOnLevel2 = collector_3
+                .OfCategory(BuiltInCategory.OST_Walls)
+                .WherePasses(level2Filter)
+                .Cast<Element>()
+                .ToList();
+
+            TaskDialog.Show("Количество стен на этажах:", $"Количество стен на 1 этаже: {allWallsOnLevel1.Count.ToString()}, {Environment.NewLine}" +
+                $"Количество стен на 2 этаже: {allWallsOnLevel2.Count.ToString()}");
 
             return Result.Succeeded;
         }
