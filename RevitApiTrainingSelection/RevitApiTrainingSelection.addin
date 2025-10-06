@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Command">
+		<Assembly>"C:\Users\alex206\Desktop\Курсы\ИТМО. Автоматизация информационного поделирования\Модуль 5\RevitApiTrainingSelection\RevitApiTrainingSelection.dll"</Assembly>		
+		<AddInId>29F8955F-F87B-409C-B5F0-4CBB2D325ED6</AddInId>		
+		<FullClassName>RevitApiTrainingSelection.Main</FullClassName>
+		<VendorId>ADSK</VendorId>
+		<Text>Выбор элементов</Text>
+	</AddIn>
+</RevitAddIns>
