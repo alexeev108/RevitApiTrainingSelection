@@ -102,14 +102,78 @@ namespace RevitApiTrainingSelection
             //TaskDialog.Show("Количество окон:", windows.Count.ToString());
 
             //Поиск типов элементов
-            FilteredElementCollector collector = new FilteredElementCollector(document);
-            List<FamilySymbol> familySymbols = collector
-                .OfCategory(BuiltInCategory.OST_Doors)
-                .WhereElementIsElementType()
-                .Cast<FamilySymbol>()
-                .ToList();
+            //FilteredElementCollector collector = new FilteredElementCollector(document);
+            //List<FamilySymbol> familySymbols = collector
+            //    .OfCategory(BuiltInCategory.OST_Doors)
+            //    .WhereElementIsElementType()
+            //    .Cast<FamilySymbol>()
+            //    .ToList();
 
-            TaskDialog.Show("Количество типов дверей:", familySymbols.Count.ToString());
+            //TaskDialog.Show("Количество типов дверей:", familySymbols.Count.ToString());
+
+            //Чтение параметров экземпляра
+            //var selectedRef = uIDocument.Selection.PickObject(ObjectType.Element, "Выберете элемент");
+            //var selectedElement = document.GetElement(selectedRef);
+            //if (selectedElement is Wall)
+            //{ 
+            //    Parameter lengthParameter_1 = selectedElement.LookupParameter("Длина");
+            //    if (lengthParameter_1.StorageType == StorageType.Double)
+            //    {
+            //        TaskDialog.Show("Длина1= ", lengthParameter_1.AsDouble().ToString());
+            //    }
+            //    Parameter lengthParameter_2 = selectedElement.get_Parameter(BuiltInParameter.CURVE_ELEM_LENGTH);
+            //    if (lengthParameter_2.StorageType == StorageType.Double)
+            //    {
+            //        TaskDialog.Show("Длина2= ", lengthParameter_2.AsDouble().ToString());
+            //    }
+            //}
+
+            //Преобразование единиц измерения
+            //var selectedRef = uIDocument.Selection.PickObject(ObjectType.Element, "Выберете элемент");
+            //var selectedElement = document.GetElement(selectedRef);
+            //if (selectedElement is Wall)
+            //{             
+            //    Parameter lengthParameter = selectedElement.get_Parameter(BuiltInParameter.CURVE_ELEM_LENGTH);
+            //    if (lengthParameter.StorageType == StorageType.Double)
+            //    {
+            //        double lengthValue = UnitUtils.ConvertFromInternalUnits(lengthParameter.AsDouble(), UnitTypeId.Meters);
+            //        TaskDialog.Show("Длина2= ", lengthValue.ToString());
+            //    }
+            //}
+
+            //Чтение параметров типа
+            //var selectedRef = uIDocument.Selection.PickObject(ObjectType.Element, "Выберете элемент");
+            //var selectedElement = document.GetElement(selectedRef);
+            //if (selectedElement is FamilyInstance)
+            //{
+            //    var familyInstance = (FamilyInstance)selectedElement;
+            //    Parameter lengthParameter_1 = familyInstance.LookupParameter("Ширина");
+            //    TaskDialog.Show("Ширина1= ", lengthParameter_1.AsDouble().ToString());
+
+            //    Parameter lengthParameter_2 = familyInstance.Symbol.get_Parameter(BuiltInParameter.CASEWORK_WIDTH);
+            //    TaskDialog.Show("Ширина2= ", lengthParameter_2.AsDouble().ToString());
+
+            //}
+
+            //Запись параметров экземпляра и типа
+            //var selectedRef = uIDocument.Selection.PickObject(ObjectType.Element, "Выберете элемент");
+            //var selectedElement = document.GetElement(selectedRef);
+            //if (selectedElement is FamilyInstance)
+            //{
+            //    using (Transaction ts = new Transaction(document, "Установка параметров"))
+            //    {
+            //        ts.Start();
+            //        var familyInstance = selectedElement as FamilyInstance;
+            //        Parameter commentParameter = familyInstance.get_Parameter(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS);
+            //        commentParameter.Set("TestComment");
+
+            //        Parameter typeCommentParameter = familyInstance.Symbol.get_Parameter(BuiltInParameter.ALL_MODEL_TYPE_COMMENTS);
+            //        typeCommentParameter.Set("TestTypeComment");
+            //        ts.Commit();
+            //    }    
+            //}    
+
+
 
             return Result.Succeeded;
         }
